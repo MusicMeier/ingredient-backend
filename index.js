@@ -4,20 +4,21 @@ const app = express();
 const fs = require('fs');
 const multer = require('multer')
 const cors = require('cors');
-const { createWorker } = require('tesseract.js');
 const { response } = require('express');
-const worker = createWorker({
-  logger: m => console.log(m)
-});
+const Tesseract = require('tesseract.js');
+const { worker } = require('cluster');
+const { createWorker } = Tesseract;
+
+// const worker = createWorker({
+//   logger: m => console.log(m)
+// });
+
 const port = 7001;
 
-app.use(express.json())
+app.set('view engine','ejs');
+// app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
 app.use(cors());
-// const server = http.createServer((request, response) => {
-//   response.statusCode = 200;
-//   response.setHeader('Content-type', 'text/plain');
-//   response.end('Hello World\n');
-// });
 
 const storage = multer.diskStorage({
   destination: (request, file, callback) => {
@@ -28,19 +29,40 @@ const storage = multer.diskStorage({
   }
 })
 
-const upload = multer({storage: storage}).single('label');
-
-app.set('view engine','ejs');
+let upload = multer({storage: storage}).single('label');
 
 app.get('/', (request, response) => {
   response.render('index')
 })
 
-app.post('/upload', (request, response) => {
+app.post('/upload', upload, (request, response) => {
+  console.log(request.file)
   upload(request, response, error => {
-    console.log(request.file)
-  })
-})
+      if(error) {
+        console.log(error)
+        return response.send('Something went wrong');
+      }
+
+      let image = fs.readFileSync(
+        `./uploads/${request.file.originalname}`, 
+        {
+          encoding: null
+        }
+      );
+      (async () => {
+        const worker = createWorker();
+        await worker.load();
+        await worker.loadLanguage('eng');
+        await worker.initialize('eng');
+        const { data: {text} } = await worker.recognize(image);
+        console.log(text);
+      })()
+      .then(result => {
+        response.send(result);
+      })
+      // .finally(() => worker.terminate)
+    });
+  });
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
