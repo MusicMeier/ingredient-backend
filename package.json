@@ -1,0 +1,19 @@
+{
+  "name": "ingredient-backend",
+  "version": "1.0.0",
+  "description": "backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/MusicMeier/ingredient-backend.git"
+  },
+  "author": "Music Meier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MusicMeier/ingredient-backend/issues"
+  },
+  "homepage": "https://github.com/MusicMeier/ingredient-backend#readme"
+}
