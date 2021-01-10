@@ -19,8 +19,6 @@ Through  to mhy love of cooking and hosting, I have found that
 
 [![Backend demo](doc/https://i9.ytimg.com/vi/v5BzG2mIAgg/mq2.jpg?sqp=CJio7P8F&rs=AOn4CLComp-FY7H0j8dIfRho6pEFOKnHOg)](https://youtu.be/v5BzG2mIAgg "IngredientCheck!")
 
-<video>https://youtu.be/v5BzG2mIAgg<video>
-
 <h2>Technologies</h2>
 
 <ul>
