@@ -1,5 +1,5 @@
 # ingredient-backend
-<h1>N=IngredientCheck</h1>
+<h1>IngredientCheck</h1>
 A nest level label reader that takes the and extra step by comparing the label to a list.
 <br></br>
 <h2>General Info</h2>
