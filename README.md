@@ -1,6 +1,6 @@
 # ingredient-backend
 <h1>IngredientCheck</h1>
-A nest level label reader that takes the and extra step by comparing the label to a list.
+A next level label reader that takes the and extra step by comparing the label to a list.
 <br></br>
 <h2>General Info</h2>
 <p>
@@ -16,7 +16,9 @@ Through  to mhy love of cooking and hosting, I have found that
 </p>
 
 <h2>Intro Video</h2>
-[<img src="https://img.youtube.com/vi/<VIDEO ID>/maxresdefault.jpg" width="50%">](https://youtu.be/<VIDEO ID>)
+
+[![Backend demo](doc/https://i9.ytimg.com/vi/v5BzG2mIAgg/mq2.jpg?sqp=CJio7P8F&rs=AOn4CLComp-FY7H0j8dIfRho6pEFOKnHOg)](https://youtu.be/v5BzG2mIAgg "IngredientCheck!")
+
 <video>https://youtu.be/v5BzG2mIAgg<video>
 
 <h2>Technologies</h2>
