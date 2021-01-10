@@ -15,18 +15,17 @@ const { createWorker } = Tesseract;
 
 const port = 7001;
 
-let string = "carrots, lima beans, blueberry, potatos, green bean, tomatos, avacados"
-let photoWords = "carrots, lima beans, apple, blueberry, strawberry"
+let string = "WHEAT SOY AVACADO EGG TOMATOES CHEESE"
+let photoWords = "";
 
 function compareStrings(string, photoWords){
-  let newString = string.split(',')
-  let updatedphotoWords = photoWords.split(',')
+  let newString = string.split(' ')
+  let updatedphotoWords = photoWords.split(' ')
   let matchingWords = newString.filter(element => updatedphotoWords.includes(element));
   return matchingWords
 }
 
 app.set('view engine','ejs');
-// app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.use(cors());
 
@@ -65,42 +64,15 @@ app.post('/upload', upload, (request, response) => {
         await worker.loadLanguage('eng');
         await worker.initialize('eng');
         const { data: {text} } = await worker.recognize(image);
-        console.log(text);
-        console.log(compareStrings(string, photoWords));
+        photoWords = text;
+        console.log(photoWords = text)
+        return compareStrings(string, photoWords);
       })()
-      // .then(result => {
-      //   console.log(result)
-      // })
-      // .finally(() => worker.terminate)
+      .then(result => {
+        console.log(response.json(result))
+      })
     });
   });
-
-// Array.prototype.diff = function(photoWords){
-//   let result = [];
-//   this.sort();
-//   photoWords.sort();
-//   for(var i=0; i < this.length; i++){
-//     if(photoWords.indexOf(this[i]) > -1){
-//       result.push(this[i])
-//     }
-//   }
-//   return result
-// }
-// console.log(newString.diff(updatedphotoWords))
-
-// function compareStrings(photoWords, string){
-//   let newString = string.split(',')
-//   let updatedphotoWords = photoWords.split(',')
-//   // let result = [];
-//   // for(i = 0; i < newString.length; i++ ){
-//   //   for(j=0; updatedphotoWords.length; j++){
-//   //     if (newString[i].equals(updatedphotoWords[j])){
-//   //       result = result.push(newString[i])
-//   //     }
-//   //   }
-//   // }
-//   return console.log(newString), console.log(updatedphotoWords)
-// }
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
